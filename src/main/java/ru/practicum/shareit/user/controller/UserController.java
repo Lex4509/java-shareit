@@ -20,12 +20,12 @@ public class UserController {
     }
 
     @GetMapping
-    public List<UserDto> findAll(){
+    public List<UserDto> findAll() {
         return userService.findAll();
     }
 
     @PostMapping
-    public UserDto create(@Valid @RequestBody UserDto userDto){
+    public UserDto create(@Valid @RequestBody UserDto userDto) {
         return userService.create(userDto);
     }
 
@@ -35,12 +35,12 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public UserDto getById(@PathVariable long id){
+    public UserDto getById(@PathVariable long id) {
         return userService.getById(id);
     }
 
     @PatchMapping("/{id}")
-    public UserDto update(@PathVariable long id, @RequestBody UserDto userDto){
+    public UserDto update(@PathVariable long id, @RequestBody UserDto userDto) {
         return userService.update(id, userDto);
     }
 

@@ -12,13 +12,13 @@ public class ExceptionHandler {
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     @ResponseStatus(HttpStatus.CONFLICT)
-    public ErrorResponse handleNotUniqueException(final NotUniqueException e){
+    public ErrorResponse handleNotUniqueException(final NotUniqueException e) {
         return new ErrorResponse(e.getMessage());
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ErrorResponse handleNotExistException(final NotExistException e){
+    public ErrorResponse handleNotExistException(final NotExistException e) {
         return new ErrorResponse(e.getMessage());
     }
 }

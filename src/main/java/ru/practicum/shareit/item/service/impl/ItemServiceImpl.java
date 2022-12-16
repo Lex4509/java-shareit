@@ -37,7 +37,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDto update(long id, ItemDto itemDto, long userId) {
         userService.getById(userId);
-        if (getById(id).getOwner().getId()!=userId)
+        if (getById(id).getOwner().getId() != userId)
             throw new NotExistException("This item does not exist in current user items");
         return ItemMapper.toItemDto(itemDao.update(id, ItemMapper.toItem(itemDto)));
     }
@@ -61,7 +61,7 @@ public class ItemServiceImpl implements ItemService {
     @Override
     public ItemDto getById(long id) {
         List<Item> items = itemDao.getById(id);
-        if (items.size()<1)
+        if (items.size() < 1)
             throw new NotExistException("Item does not exist");
         return ItemMapper.toItemDto(items.get(0));
     }

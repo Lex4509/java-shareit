@@ -20,36 +20,36 @@ public class UserDao {
         return new ArrayList<>(users);
     }
 
-    public User create(User user){
+    public User create(User user) {
         user.setId(generator);
         generator++;
         users.add(user);
         return user;
     }
 
-    public void delete(long id){
-        users.removeIf(user-> user.getId()==id);
+    public void delete(long id) {
+        users.removeIf(user -> user.getId() == id);
     }
 
-    public List<User> getById(long id){
+    public List<User> getById(long id) {
         return users.stream()
-                .filter(user->user.getId()==id)
+                .filter(user -> user.getId() == id)
                 .collect(Collectors.toList());
     }
 
-    public User update(long id, User newUser){
+    public User update(long id, User newUser) {
         users.stream()
-                .filter(user->user.getId()==id)
+                .filter(user -> user.getId() == id)
                 .forEach(user -> {
-                    if (newUser.getName()!=null)
+                    if (newUser.getName() != null)
                         user.setName(newUser.getName());
-                    if (newUser.getEmail()!=null)
+                    if (newUser.getEmail() != null)
                         user.setEmail(newUser.getEmail());
                 });
-        return users.stream().filter(item->item.getId()==id).collect(Collectors.toList()).get(0);
+        return users.stream().filter(item -> item.getId() == id).collect(Collectors.toList()).get(0);
     }
 
-    public boolean isUniqueEmail(User user){
+    public boolean isUniqueEmail(User user) {
         for (User usr : users) {
             if (usr.getEmail().equals(user.getEmail()))
                 return false;

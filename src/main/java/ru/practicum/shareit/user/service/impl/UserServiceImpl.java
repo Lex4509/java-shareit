@@ -54,7 +54,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserDto getById(long id) {
         List<User> users = userDao.getById(id);
-        if ((users.size())<1)
+        if ((users.size()) < 1)
             throw new NotExistException("User does not exist");
         return UserMapper.toUserDto(users.get(0));
     }
