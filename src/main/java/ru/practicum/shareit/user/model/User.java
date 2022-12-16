@@ -2,9 +2,6 @@ package ru.practicum.shareit.user.model;
 
 import java.util.Objects;
 
-/**
- * TODO Sprint add-controllers.
- */
 public class User {
 
     private long id;

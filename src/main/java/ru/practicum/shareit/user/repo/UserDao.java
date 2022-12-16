@@ -28,18 +28,18 @@ public class UserDao {
     }
 
     public void delete(long id){
-        users.removeIf(item-> item.getId()==id);
+        users.removeIf(user-> user.getId()==id);
     }
 
     public List<User> getById(long id){
         return users.stream()
-                .filter(item->item.getId()==id)
+                .filter(user->user.getId()==id)
                 .collect(Collectors.toList());
     }
 
     public User update(long id, User newUser){
         users.stream()
-                .filter(item->item.getId()==id)
+                .filter(user->user.getId()==id)
                 .forEach(user -> {
                     if (newUser.getName()!=null)
                         user.setName(newUser.getName());
