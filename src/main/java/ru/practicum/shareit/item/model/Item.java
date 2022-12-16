@@ -3,19 +3,16 @@ package ru.practicum.shareit.item.model;
 import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 
-/**
- * TODO Sprint add-controllers.
- */
 public class Item {
 
     private long id;
     private String name;
     private String description;
-    private boolean isAvailable;
+    private Boolean isAvailable;
     private User owner;
     private ItemRequest request;
 
-    public Item(long id, String name, String description, boolean isAvailable, User owner, ItemRequest request) {
+    public Item(long id, String name, String description, Boolean isAvailable, User owner, ItemRequest request) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -48,11 +45,11 @@ public class Item {
         this.description = description;
     }
 
-    public boolean isAvailable() {
+    public Boolean isAvailable() {
         return isAvailable;
     }
 
-    public void setAvailable(boolean available) {
+    public void setAvailable(Boolean available) {
         isAvailable = available;
     }
 

@@ -1,12 +1,12 @@
 package ru.practicum.shareit.item.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.NotExistException;
 import ru.practicum.shareit.item.dto.ItemDto;
 import ru.practicum.shareit.item.mapper.ItemMapper;
 import ru.practicum.shareit.item.model.Item;
-import ru.practicum.shareit.item.repo.ItemDao;
+import ru.practicum.shareit.item.dao.ItemDao;
 import ru.practicum.shareit.item.service.ItemService;
 import ru.practicum.shareit.user.mapper.UserMapper;
 import ru.practicum.shareit.user.service.UserService;
@@ -14,7 +14,7 @@ import ru.practicum.shareit.user.service.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class ItemServiceImpl implements ItemService {
 
     private final ItemDao itemDao;
@@ -28,8 +28,10 @@ public class ItemServiceImpl implements ItemService {
 
     @Override
     public ItemDto create(long id, ItemDto itemDto) {
+
         itemDto.setOwner(UserMapper.toUser(userService.getById(id)));
         return ItemMapper.toItemDto(itemDao.create(ItemMapper.toItem(itemDto)));
+
     }
 
     @Override

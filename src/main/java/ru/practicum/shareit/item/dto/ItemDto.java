@@ -4,6 +4,7 @@ import ru.practicum.shareit.request.model.ItemRequest;
 import ru.practicum.shareit.user.model.User;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 public class ItemDto {
 
@@ -12,16 +13,16 @@ public class ItemDto {
     private String name;
     @NotBlank
     private String description;
-    // TODO fix: @NotBlank
-    private boolean isAvailable;
+    @NotNull
+    private Boolean available;
     private User owner;
     private ItemRequest request;
 
-    public ItemDto(long id, String name, String description, boolean isAvailable, User owner, ItemRequest request) {
+    public ItemDto(long id, String name, String description, Boolean isAvailable, User owner, ItemRequest request) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.isAvailable = isAvailable;
+        this.available = isAvailable;
         this.owner = owner;
         this.request = request;
     }
@@ -50,12 +51,12 @@ public class ItemDto {
         this.description = description;
     }
 
-    public boolean isAvailable() {
-        return isAvailable;
+    public Boolean getAvailable() {
+        return available;
     }
 
-    public void setAvailable(boolean available) {
-        isAvailable = available;
+    public void setAvailable(Boolean available) {
+        this.available = available;
     }
 
     public User getOwner() {

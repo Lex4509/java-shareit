@@ -1,4 +1,4 @@
-package ru.practicum.shareit.item.repo;
+package ru.practicum.shareit.item.dao;
 
 import org.springframework.stereotype.Component;
 import ru.practicum.shareit.item.model.Item;
@@ -29,7 +29,8 @@ public class ItemDao {
                         currentItem.setName(item.getName());
                     if (item.getDescription()!=null)
                         currentItem.setDescription(item.getDescription());
-                    currentItem.setAvailable(item.isAvailable());
+                    if (item.isAvailable() != null)
+                        currentItem.setAvailable(item.isAvailable());
                         }
                 );
         return items.stream().filter(currentItem -> currentItem.getId()==id).collect(Collectors.toList()).get(0);
@@ -43,8 +44,8 @@ public class ItemDao {
 
     public List<Item> search(String text){
         return items.stream()
-                .filter(item->item.getName().toLowerCase()
-                        .contains(text.toLowerCase())||item.getDescription().contains(text.toLowerCase()))
+                .filter(item-> item.getName().toLowerCase().contains(text.toLowerCase())||
+                        item.getDescription().toLowerCase().contains(text.toLowerCase()))
                 .filter(Item::isAvailable)
                 .collect(Collectors.toList());
     }
