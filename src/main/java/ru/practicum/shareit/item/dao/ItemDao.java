@@ -3,6 +3,7 @@ package ru.practicum.shareit.item.dao;
 import org.springframework.stereotype.Component;
 import ru.practicum.shareit.item.model.Item;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -43,11 +44,21 @@ public class ItemDao {
     }
 
     public List<Item> search(String text) {
-        return items.stream()
-                .filter(item -> item.getName().toLowerCase().contains(text.toLowerCase()) ||
-                        item.getDescription().toLowerCase().contains(text.toLowerCase()))
-                .filter(Item::isAvailable)
-                .collect(Collectors.toList());
+        List<Item> itemList = new ArrayList<>();
+
+        if (!text.isBlank()) {
+            for (Item item : items) {
+                String name = item.getName().toLowerCase();
+                String description = item.getDescription().toLowerCase();
+
+                if (name.contains(text.toLowerCase()) || description.contains(text.toLowerCase()) && item.isAvailable()) {
+                    itemList.add(item);
+                }
+            }
+        }
+
+        return itemList;
+
     }
 
     public List<Item> getById(long id) {
