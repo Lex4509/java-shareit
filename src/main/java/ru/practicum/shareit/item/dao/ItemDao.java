@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 @Component
 public class ItemDao {
 
-    Set<Item> items = new HashSet<>();
+    private final Set<Item> items = new HashSet<>();
     int generator = 1;
 
     public Item create(Item item) {

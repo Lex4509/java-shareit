@@ -14,7 +14,7 @@ public class UserDao {
 
     int generator = 1;
 
-    Set<User> users = new HashSet<>();
+    public final Set<User> users = new HashSet<>();
 
     public List<User> findAll() {
         return new ArrayList<>(users);
