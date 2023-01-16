@@ -1,37 +1,30 @@
 package ru.practicum.shareit.booking.dto;
 
 import lombok.Builder;
-import ru.practicum.shareit.booking.Status;
-import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.user.dto.UserDto;
 
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
 @Builder
-public class BookingDto {
+public class BookingForItemDto {
     @Positive
-    @NotNull
     private Long id;
     @NotNull
     private LocalDateTime start;
     @NotNull
     private LocalDateTime end;
     @NotNull
-    private ItemDto item;
-    @NotNull
-    private UserDto booker;
-    @NotNull
-    private Status status;
+    private Item item;
+    @Positive
+    private Long bookerId;
 
-    public BookingDto(Long id, LocalDateTime start, LocalDateTime end, ItemDto item, UserDto booker, Status status) {
+    public BookingForItemDto(Long id, LocalDateTime start, LocalDateTime end, Item item, Long bookerId) {
         this.id = id;
         this.start = start;
         this.end = end;
         this.item = item;
-        this.booker = booker;
-        this.status = status;
+        this.bookerId = bookerId;
     }
 
     public Long getId() {
@@ -58,27 +51,45 @@ public class BookingDto {
         this.end = end;
     }
 
-    public ItemDto getItem() {
+    public Item getItem() {
         return item;
     }
 
-    public void setItem(ItemDto item) {
+    public void setItem(Item item) {
         this.item = item;
     }
 
-    public UserDto getBooker() {
-        return booker;
+    public Long getBookerId() {
+        return bookerId;
     }
 
-    public void setBooker(UserDto booker) {
-        this.booker = booker;
+    public void setBookerId(Long bookerId) {
+        this.bookerId = bookerId;
     }
 
-    public Status getStatus() {
-        return status;
-    }
+    public static class Item {
+        private Long id;
+        private String name;
 
-    public void setStatus(Status status) {
-        this.status = status;
+        public Item(Long id, String name) {
+            this.id = id;
+            this.name = name;
+        }
+
+        public Long getId() {
+            return id;
+        }
+
+        public void setId(Long id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
     }
 }

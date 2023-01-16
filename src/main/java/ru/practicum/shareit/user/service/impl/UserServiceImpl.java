@@ -1,7 +1,7 @@
 package ru.practicum.shareit.user.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import ru.practicum.shareit.exception.NotExistException;
 import ru.practicum.shareit.exception.NotUniqueException;
 import ru.practicum.shareit.user.dto.UserDto;
@@ -13,7 +13,7 @@ import ru.practicum.shareit.user.service.UserService;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
+@Service
 public class UserServiceImpl implements UserService {
 
     private final UserDao userDao;
@@ -58,6 +58,5 @@ public class UserServiceImpl implements UserService {
             throw new NotExistException("User does not exist");
         return UserMapper.toUserDto(users.get(0));
     }
-
 
 }

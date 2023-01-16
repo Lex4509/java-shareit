@@ -38,9 +38,7 @@ public class ItemDao {
     }
 
     public List<Item> findAll(long id) {
-        return items.stream()
-                .filter(item -> item.getOwner().getId() == id)
-                .collect(Collectors.toList());
+        return null;
     }
 
     public List<Item> search(String text) {

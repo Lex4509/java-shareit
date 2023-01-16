@@ -1,12 +1,23 @@
 package ru.practicum.shareit.user.model;
 
+import javax.persistence.*;
 import java.util.Objects;
 
+@Entity
+@Table(name = "users", schema = "public")
 public class User {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, updatable = false, unique = true)
     private long id;
     private String name;
+    @Column(unique = true)
     private String email;
+
+    public User() {
+
+    }
 
     public long getId() {
         return id;
