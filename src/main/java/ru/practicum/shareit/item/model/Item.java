@@ -21,7 +21,9 @@ public class Item {
     @Column(name = "request_id")
     private Long request;
 
-    public Item() {}
+    public Item() {
+
+    }
 
     public Item(long id, String name, String description, Boolean isAvailable, Long owner, Long request) {
         this.id = id;

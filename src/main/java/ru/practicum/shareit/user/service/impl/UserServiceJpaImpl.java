@@ -58,9 +58,9 @@ public class UserServiceJpaImpl implements UserService {
         User oldUser = userRepository.findById(id)
                 .orElseThrow(() -> new NotExistException("User does not exist"));
         User newUser = UserMapper.toUser(userDto);
-        if (newUser.getName()!=null && !newUser.getName().isBlank())
+        if (newUser.getName() != null && !newUser.getName().isBlank())
             oldUser.setName(newUser.getName());
-        if (newUser.getEmail()!=null && !newUser.getEmail().isBlank())
+        if (newUser.getEmail() != null && !newUser.getEmail().isBlank())
             oldUser.setEmail(newUser.getEmail());
         userRepository.save(oldUser);
         return UserMapper.toUserDto(oldUser);
