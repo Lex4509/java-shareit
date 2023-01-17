@@ -1,18 +1,31 @@
 package ru.practicum.shareit.item.model;
 
-import ru.practicum.shareit.request.model.ItemRequest;
-import ru.practicum.shareit.user.model.User;
+import lombok.Builder;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "items")
+@Builder
 public class Item {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
     private String description;
+    @Column(name = "is_available")
     private Boolean isAvailable;
-    private User owner;
-    private ItemRequest request;
+    @Column(name = "owner_id")
+    private Long owner;
+    @Column(name = "request_id")
+    private Long request;
 
-    public Item(long id, String name, String description, Boolean isAvailable, User owner, ItemRequest request) {
+    public Item() {
+
+    }
+
+    public Item(long id, String name, String description, Boolean isAvailable, Long owner, Long request) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -53,19 +66,19 @@ public class Item {
         isAvailable = available;
     }
 
-    public User getOwner() {
+    public Long getOwner() {
         return owner;
     }
 
-    public void setOwner(User owner) {
+    public void setOwner(Long owner) {
         this.owner = owner;
     }
 
-    public ItemRequest getRequest() {
+    public Long getRequest() {
         return request;
     }
 
-    public void setRequest(ItemRequest request) {
+    public void setRequest(Long request) {
         this.request = request;
     }
 }

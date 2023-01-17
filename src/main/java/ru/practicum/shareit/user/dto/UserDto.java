@@ -1,5 +1,7 @@
 package ru.practicum.shareit.user.dto;
 
+import ru.practicum.shareit.validation.Marker;
+
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import java.util.Objects;
@@ -7,10 +9,10 @@ import java.util.Objects;
 public class UserDto {
 
     private long id;
-    @NotBlank
+    @NotBlank(groups = Marker.OnCreate.class, message = "Name can not be empty")
     private String name;
-    @NotBlank
-    @Email
+    @NotBlank(groups = Marker.OnCreate.class, message = "Email can not be empty")
+    @Email(groups = {Marker.OnCreate.class, Marker.OnUpdate.class}, message = "Invalid email")
     private String email;
 
     public UserDto(long id, String name, String email) {

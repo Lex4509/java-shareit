@@ -20,5 +20,4 @@ public class UserMapper {
                 userDto.getEmail()
         );
     }
-
 }
