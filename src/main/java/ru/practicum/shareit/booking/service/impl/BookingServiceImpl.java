@@ -91,14 +91,17 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<BookingDto> getAllByBooker(State state, long userId) {
+    public List<BookingDto> getAllByBooker(String state, long userId) {
+
+        State resultState = throwIfStateNotValid(state);
+
         if (!userRepository.existsById(userId)) {
             throw new NotExistException("User not exist");
         }
 
         List<BookingDto> result = Collections.emptyList();
 
-        switch (state) {
+        switch (resultState) {
             case ALL:
                 result = BookingMapper.toListOfBookingDto(bookingRepository.findAllByBookerId(userId,
                         Sort.by(Sort.Direction.DESC, "end")));
@@ -130,14 +133,17 @@ public class BookingServiceImpl implements BookingService {
     }
 
     @Override
-    public List<BookingDto> getAllByOwner(State state, long userId) {
+    public List<BookingDto> getAllByOwner(String state, long userId) {
+
+        State resultState = throwIfStateNotValid(state);
+
         if (!userRepository.existsById(userId)) {
             throw new NotExistException("User not exist");
         }
 
         List<BookingDto> result = Collections.emptyList();
 
-        switch (state) {
+        switch (resultState) {
             case ALL:
                 result = BookingMapper.toListOfBookingDto(bookingRepository.findAllByOwnerId(userId,
                         Sort.by(Sort.Direction.DESC, "end")));
@@ -169,5 +175,13 @@ public class BookingServiceImpl implements BookingService {
                 break;
         }
         return result;
+    }
+
+    private State throwIfStateNotValid(String state) {
+        try {
+            return State.valueOf(state);
+        } catch (IllegalArgumentException e) {
+            throw new BadRequestException("Unknown state: " + state);
+        }
     }
 }

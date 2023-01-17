@@ -2,11 +2,9 @@ package ru.practicum.shareit.booking.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import ru.practicum.shareit.booking.State;
 import ru.practicum.shareit.booking.dto.BookingCreateDto;
 import ru.practicum.shareit.booking.dto.BookingDto;
 import ru.practicum.shareit.booking.service.BookingService;
-import ru.practicum.shareit.exception.BadRequestException;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
@@ -45,21 +43,13 @@ public class BookingController {
     @GetMapping
     public List<BookingDto> getAllByBooker(@RequestParam(defaultValue = "ALL") String state,
                                            @RequestHeader("X-Sharer-User-Id") long userId) {
-        return bookingService.getAllByBooker(throwIfStateNotValid(state), userId);
+        return bookingService.getAllByBooker(state, userId);
     }
 
     @GetMapping("/owner")
     public List<BookingDto> getAllByOwner(@RequestParam(defaultValue = "ALL") String state,
                                           @RequestHeader("X-Sharer-User-Id") long userId) {
-        return bookingService.getAllByOwner(throwIfStateNotValid(state), userId);
-    }
-
-    private State throwIfStateNotValid(String state) {
-        try {
-            return State.valueOf(state);
-        } catch (IllegalArgumentException e) {
-            throw new BadRequestException("Unknown state: " + state);
-        }
+        return bookingService.getAllByOwner(state, userId);
     }
 
 }
