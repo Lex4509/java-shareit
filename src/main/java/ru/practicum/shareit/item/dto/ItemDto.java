@@ -31,75 +31,14 @@ public class ItemDto {
     public ItemDto() {
     }
 
-    public Long getId() {
-        return id;
-    }
+    public ItemDto(Long id, String name, String description, Boolean available, Long userId, Long requestId) {
 
-    public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
         this.available = available;
-    }
-
-    public Long getOwner() {
-        return owner;
-    }
-
-    public void setOwner(Long owner) {
-        this.owner = owner;
-    }
-
-    public Long getRequestId() {
-        return requestId;
-    }
-
-    public void setRequestId(Long requestId) {
+        this.owner = userId;
         this.requestId = requestId;
-    }
 
-    public BookingInfoDto getLastBooking() {
-        return lastBooking;
-    }
-
-    public void setLastBooking(BookingInfoDto lastBooking) {
-        this.lastBooking = lastBooking;
-    }
-
-    public BookingInfoDto getNextBooking() {
-        return nextBooking;
-    }
-
-    public void setNextBooking(BookingInfoDto nextBooking) {
-        this.nextBooking = nextBooking;
-    }
-
-    public List<CommentDto> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<CommentDto> comments) {
-        this.comments = comments;
     }
 }
