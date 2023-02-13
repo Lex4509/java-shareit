@@ -1,33 +1,41 @@
 package ru.practicum.shareit.item.dto;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import ru.practicum.shareit.booking.dto.BookingInfoDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
-@Builder
+@Getter
+@Setter
+@AllArgsConstructor
 public class ItemDto {
-
-    private long id;
-    @NotBlank
+    private Long id;
+    @NotBlank (message = "Item name should be not blank")
     private String name;
-    @NotBlank
+    @NotBlank (message = "Item description should be not blank or null")
+    @Size(max = 200, message = "Item description should be not longer than 200 letters")
     private String description;
-    @NotNull
+    @NotNull (message = "Item available should be not null")
     private Boolean available;
+    private Long owner;
+    private Long requestId;
+    private BookingInfoDto lastBooking;
+    private BookingInfoDto nextBooking;
+    private List<CommentDto> comments;
 
-    public ItemDto(long id, String name, String description, Boolean isAvailable) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
-        this.available = isAvailable;
+    public ItemDto() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,4 +63,43 @@ public class ItemDto {
         this.available = available;
     }
 
+    public Long getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Long owner) {
+        this.owner = owner;
+    }
+
+    public Long getRequestId() {
+        return requestId;
+    }
+
+    public void setRequestId(Long requestId) {
+        this.requestId = requestId;
+    }
+
+    public BookingInfoDto getLastBooking() {
+        return lastBooking;
+    }
+
+    public void setLastBooking(BookingInfoDto lastBooking) {
+        this.lastBooking = lastBooking;
+    }
+
+    public BookingInfoDto getNextBooking() {
+        return nextBooking;
+    }
+
+    public void setNextBooking(BookingInfoDto nextBooking) {
+        this.nextBooking = nextBooking;
+    }
+
+    public List<CommentDto> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<CommentDto> comments) {
+        this.comments = comments;
+    }
 }

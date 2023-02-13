@@ -1,48 +1,56 @@
 package ru.practicum.shareit.user.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.validation.annotation.Validated;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 import ru.practicum.shareit.user.dto.UserDto;
 import ru.practicum.shareit.user.service.UserService;
-import ru.practicum.shareit.validation.Marker;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
 @RequestMapping(path = "/users")
+@Slf4j
 public class UserController {
 
     private final UserService userService;
 
-    @Autowired
     public UserController(UserService userService) {
         this.userService = userService;
     }
 
     @GetMapping
-    public List<UserDto> findAll() {
-        return userService.findAll();
+    public List<UserDto> getUsers() {
+        return userService.getUsers();
+    }
+
+
+    @GetMapping("/{id}")
+    public UserDto findUser(@PathVariable("id") Long id) {
+        log.info("get user with id = {}", id);
+        return userService.findUser(id);
     }
 
     @PostMapping
-    public UserDto create(@RequestBody @Validated(Marker.OnCreate.class) UserDto userDto) {
-        return userService.create(userDto);
-    }
-
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable long id) {
-        userService.delete(id);
-    }
-
-    @GetMapping("/{id}")
-    public UserDto getById(@PathVariable long id) {
-        return userService.getById(id);
+    public UserDto addNewUser(@RequestBody @NotNull @Valid UserDto userDto) {
+        log.info("save new user = {}", userDto);
+        return userService.addNewUser(userDto);
     }
 
     @PatchMapping("/{id}")
-    public UserDto update(@PathVariable long id, @RequestBody @Validated(Marker.OnUpdate.class) UserDto userDto) {
-        return userService.update(id, userDto);
+    public UserDto updateUser(@PathVariable("id") Long id,
+                              @RequestBody @NotNull UserDto userDto) {
+        userDto.setId(id);
+        log.info("update user = {}", userDto);
+        return userService.updateUser(userDto);
     }
+
+    @DeleteMapping("/{id}")
+    public void deleteUser(@PathVariable("id") Long id) {
+        log.info("delete user with id = {}", id);
+        userService.deleteUser(id);
+    }
+
 
 }

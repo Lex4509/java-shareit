@@ -1,45 +1,40 @@
 package ru.practicum.shareit.item.mapper;
 
 import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.item.dto.ItemDtoWithBookingsAndComments;
+import ru.practicum.shareit.item.dto.ItemInfoDto;
 import ru.practicum.shareit.item.model.Item;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class ItemMapper {
 
-    public static Item toItem(ItemDto itemDto) {
-
-        return Item.builder()
-                .name(itemDto.getName())
-                .description(itemDto.getDescription())
-                .isAvailable(itemDto.getAvailable())
-                .build();
+    private ItemMapper() {
     }
 
     public static ItemDto toItemDto(Item item) {
-        return ItemDto.builder()
-                .id(item.getId())
-                .name(item.getName())
-                .description(item.getDescription())
-                .available(item.isAvailable())
-                .build();
+        return new ItemDto(
+                item.getId(),
+                item.getName(),
+                item.getDescription(),
+                item.getAvailable(),
+                item.getOwner().getId(),
+                item.getRequest() != null ? item.getRequest().getId() : null,
+                null,
+                null,
+                null
+        );
     }
 
-    public static ItemDtoWithBookingsAndComments toItemDtoWithBooking(Item item) {
-        return ItemDtoWithBookingsAndComments.builder()
-                .id(item.getId())
-                .name(item.getName())
-                .description(item.getDescription())
-                .available(item.isAvailable())
-                .build();
+    public static ItemInfoDto toItemInfoDto(Item item) {
+        return new ItemInfoDto(
+                item.getId(),
+                item.getName(),
+                item.getOwner().getId());
     }
 
-    public static List<ItemDto> toListOfItemDto(List<Item> items) {
-        return items.stream()
-                .map(ItemMapper::toItemDto)
-                .collect(Collectors.toList());
+    public static Item toItem(ItemDto itemDto) {
+        return new Item(
+                itemDto.getName(),
+                itemDto.getDescription(),
+                itemDto.getAvailable()
+        );
     }
-
 }

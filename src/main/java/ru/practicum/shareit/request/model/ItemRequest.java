@@ -1,45 +1,30 @@
 package ru.practicum.shareit.request.model;
 
+import lombok.Getter;
+import lombok.Setter;
 import ru.practicum.shareit.user.model.User;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Getter
+@Setter
+@Entity
+@Table(name = "requests")
 public class ItemRequest {
-
-    private long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
     private String description;
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "requestor_id")
     private User requestor;
     private LocalDateTime created;
 
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
+    public ItemRequest(String description) {
         this.description = description;
     }
 
-    public User getRequestor() {
-        return requestor;
-    }
-
-    public void setRequestor(User requestor) {
-        this.requestor = requestor;
-    }
-
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
+    public ItemRequest() {
     }
 }

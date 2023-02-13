@@ -1,84 +1,32 @@
 package ru.practicum.shareit.booking.dto;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import ru.practicum.shareit.booking.Status;
-import ru.practicum.shareit.item.dto.ItemDto;
-import ru.practicum.shareit.user.dto.UserDto;
+import ru.practicum.shareit.util.validator.StartAndEndValid;
+import ru.practicum.shareit.item.dto.ItemInfoDto;
+import ru.practicum.shareit.user.dto.UserInfoDto;
 
+import javax.validation.constraints.Future;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
 import java.time.LocalDateTime;
 
-@Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@StartAndEndValid
 public class BookingDto {
-    @Positive
-    @NotNull
     private Long id;
-    @NotNull
+    @NotNull(message = "start date should be not null")
+    @Future(message = "start time should be in future")
     private LocalDateTime start;
-    @NotNull
+    @NotNull(message = "end date should be not null")
+    @Future(message = "end time should be in future")
     private LocalDateTime end;
-    @NotNull
-    private ItemDto item;
-    @NotNull
-    private UserDto booker;
-    @NotNull
+    @NotNull(message = "item id should be not null")
+    private Long itemId;
+    private ItemInfoDto item;
+    private UserInfoDto booker;
     private Status status;
-
-    public BookingDto(Long id, LocalDateTime start, LocalDateTime end, ItemDto item, UserDto booker, Status status) {
-        this.id = id;
-        this.start = start;
-        this.end = end;
-        this.item = item;
-        this.booker = booker;
-        this.status = status;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public LocalDateTime getStart() {
-        return start;
-    }
-
-    public void setStart(LocalDateTime start) {
-        this.start = start;
-    }
-
-    public LocalDateTime getEnd() {
-        return end;
-    }
-
-    public void setEnd(LocalDateTime end) {
-        this.end = end;
-    }
-
-    public ItemDto getItem() {
-        return item;
-    }
-
-    public void setItem(ItemDto item) {
-        this.item = item;
-    }
-
-    public UserDto getBooker() {
-        return booker;
-    }
-
-    public void setBooker(UserDto booker) {
-        this.booker = booker;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    public void setStatus(Status status) {
-        this.status = status;
-    }
 }
