@@ -1,58 +1,44 @@
 package ru.practicum.shareit.item.dto;
 
-import lombok.Builder;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import ru.practicum.shareit.booking.dto.BookingInfoDto;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.List;
 
-@Builder
+@Getter
+@Setter
+@AllArgsConstructor
 public class ItemDto {
-
-    private long id;
-    @NotBlank
+    private Long id;
+    @NotBlank (message = "Item name should be not blank")
     private String name;
-    @NotBlank
+    @NotBlank (message = "Item description should be not blank or null")
+    @Size(max = 200, message = "Item description should be not longer than 200 letters")
     private String description;
-    @NotNull
+    @NotNull (message = "Item available should be not null")
     private Boolean available;
+    private Long owner;
+    private Long requestId;
+    private BookingInfoDto lastBooking;
+    private BookingInfoDto nextBooking;
+    private List<CommentDto> comments;
 
-    public ItemDto(long id, String name, String description, Boolean isAvailable) {
+    public ItemDto() {
+    }
+
+    public ItemDto(Long id, String name, String description, Boolean available, Long userId, Long requestId) {
+
         this.id = id;
         this.name = name;
         this.description = description;
-        this.available = isAvailable;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Boolean getAvailable() {
-        return available;
-    }
-
-    public void setAvailable(Boolean available) {
         this.available = available;
-    }
+        this.owner = userId;
+        this.requestId = requestId;
 
+    }
 }
