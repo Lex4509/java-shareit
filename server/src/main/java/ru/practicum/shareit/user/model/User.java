@@ -4,6 +4,10 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * TODO Sprint add-controllers.
+ */
+
 @Getter
 @Setter
 @Entity

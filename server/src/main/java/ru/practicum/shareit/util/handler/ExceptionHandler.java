@@ -3,7 +3,6 @@ package ru.practicum.shareit.util.handler;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import ru.practicum.shareit.util.exeption.BadRequestException;
@@ -13,37 +12,37 @@ import ru.practicum.shareit.util.exeption.UserVerificationException;
 
 @Slf4j
 @RestControllerAdvice
-public class ErrorHandler {
+public class ExceptionHandler {
 
-    @ExceptionHandler
+    @org.springframework.web.bind.annotation.ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleEntityNotFoundException(final NotFoundException e) {
         log.warn(e.getMessage());
         return new ErrorResponse(e.getMessage());
     }
 
-    @ExceptionHandler
+    @org.springframework.web.bind.annotation.ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleMethodArgumentNotValidException(final MethodArgumentNotValidException e) {
         log.warn(e.getMessage());
         return new ErrorResponse(e.getMessage());
     }
 
-    @ExceptionHandler
+    @org.springframework.web.bind.annotation.ExceptionHandler
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ErrorResponse handleBadRequestException(final BadRequestException e) {
         log.warn(e.getMessage());
         return new ErrorResponse(e.getMessage());
     }
 
-    @ExceptionHandler
+    @org.springframework.web.bind.annotation.ExceptionHandler
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ErrorResponse handleUserVerificationException(final UserVerificationException e) {
         log.warn(e.getMessage());
         return new ErrorResponse(e.getMessage());
     }
 
-    @ExceptionHandler
+    @org.springframework.web.bind.annotation.ExceptionHandler
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ErrorResponse handleThrowable(final Throwable e) {
         log.warn(e.getMessage());
